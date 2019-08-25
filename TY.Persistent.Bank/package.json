@@ -1,0 +1,36 @@
+{
+  "name": "ty.persistent.bank",
+  "version": "1.0.0",
+  "description": "Persistent layer for bank",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daidorian09/TY.Kong.git"
+  },
+  "author": "Yigit At",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daidorian09/TY.Kong/issues"
+  },
+  "homepage": "https://github.com/daidorian09/TY.Kong#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.10",
+    "morgan": "^1.9.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^14.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^1.19.1"
+  }
+}
