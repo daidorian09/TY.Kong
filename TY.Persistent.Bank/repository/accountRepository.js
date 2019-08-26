@@ -1,8 +1,8 @@
 import { model } from 'mongoose'
 const Account = model('Account')
-import { setErrorResponse, setSuccesResponse } from '../models/response/response';
+import logger from '../utils/logger/logger'
 
-export default async function create(request) {
+module.exports = async function create(request) {
 
     try {
         const account = new Account()
@@ -18,30 +18,28 @@ export default async function create(request) {
     
         await account.save()
     } catch (error) {
-        
+        logger.error(`Exception thrown in AccountRepository/create -> ${error.message}`)
+        return null
     }  
 
 }
 
-export default async function getById(id) {
+module.exports = async function getById(id) {
 
     try {
         const account = await Account.findOne({id, isActive : true})
         .lean()
         .exec()
-
-        if(!account) {
-            
-        }
         
-        return account;
+        return account
     } catch (error) {
-        
+        logger.error(`Exception thrown in AccountRepository/getById repository -> ${error.message}`)
+        return null
     }  
 
 }
 
-export default async function deleteAndUpdate(id) {
+module.exports = async function deleteAndUpdate(id) {
 
     try {
         const $set = {
@@ -51,9 +49,10 @@ export default async function deleteAndUpdate(id) {
             }
         }
         const account = await Account.findByIdAndUpdate(id, $set, {new: true}).lean().exec()
-        return account;
+        return account
     } catch (error) {
-        
+        logger.error(`Exception thrown in AccountRepository/deleteAndUpdate repository -> ${error.message}`)
+        return null
     }  
 
 }
@@ -62,8 +61,9 @@ export default async function update(request) {
 
     try {
         const account = await Account.findByIdAndUpdate(request.id, request.data, {new: true}).lean().exec()
-        return account;
+        return account
     } catch (error) {
-        
+        logger.error(`Exception thrown in AccountRepository/update repository -> ${error.message}`)
+        return null
     }
 }

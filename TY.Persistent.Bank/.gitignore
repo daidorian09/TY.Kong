@@ -55,7 +55,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+variables.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -72,6 +72,5 @@ typings/
 # Serverless directories
 .serverless
 
-# Logs output
-.logs/error/
-.logs/exception/
+# vscode
+.vscode/

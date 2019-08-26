@@ -1,8 +1,10 @@
 import express from 'express'
 import morgan from 'morgan'
-
-const logger = require('./utils/logger/logger')
-
+import bodyParser from'body-parser'
+import mongoose from 'mongoose'
+import logger from './utils/logger/logger'
+import path from 'path'
+import fs from 'fs'
 
 // Load environment variables using dotenv
 require('dotenv').config({
@@ -19,6 +21,25 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+
+//MongoDb connectionstring
+const db = process.env.CONNECTIONSTRING
+mongoose.Promise = global.Promise
+
+// Connect to MongoDB
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => logger.info('MongoDB connected'))
+  .catch(err => logger.error(err));
+
+//Bind all models
+const modelsPath = path.join(__dirname, 'models')
+fs.readdirSync(modelsPath).forEach((file) => {
+  require(path.join(modelsPath, file))
+})
+  
+// Bind all api endpoints
+require('./routes')(app)
 
 const port = process.env.PORT
 

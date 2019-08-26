@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-mongoose.set('debug', true)
+import { set, Schema, model } from 'mongoose'
+set('debug', true)
 
-var AccountSchema = new mongoose.Schema({
+const AccountSchema = new Schema({
     firstName: {
         type: String,
         required: true,
@@ -47,13 +47,15 @@ var AccountSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    isActive : {
+    isActive: {
         type: Boolean,
         default: true
     }
 }, {
     timestamps: true,
-    toJSON: true
-});
+    toJSON: {
+        virtuals: true
+    }
+})
 
-mongoose.model('Account', AccountSchema);
+model('Account', AccountSchema)

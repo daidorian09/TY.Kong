@@ -4,7 +4,9 @@
   "description": "Persistent layer for bank",
   "main": "server.js",
   "scripts": {
-    "test": "npm start server.js"
+    "start": "npm run server.js",
+    "watch": "nodemon --exec babel-node server.js",
+    "start:dev": "babel-node server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,10 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "eslint-config-standard": "^14.0.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.1.0",

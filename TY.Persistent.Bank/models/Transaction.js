@@ -1,9 +1,9 @@
-var mongoose = require('mongoose')
-mongoose.set('debug', true)
+import { set, Schema, model } from 'mongoose'
+set('debug', true)
 
-var TransactionSchema = new mongoose.Schema({
+const TransactionSchema = new Schema({
     account: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'account'
     },
     amount: {
@@ -28,9 +28,15 @@ var TransactionSchema = new mongoose.Schema({
         max: 1,
         default: 0
     },
+    isActive: {
+        type: Boolean,
+        default: true
+    }
 }, {
     timestamps: true,
-    toJSON: true
+    toJSON: {
+        virtuals: true
+    }
 });
 
-mongoose.model('Transaction', TransactionSchema)
+model('Transaction', TransactionSchema)
