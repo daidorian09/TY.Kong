@@ -1,7 +1,19 @@
-import AcountService from './accountService'
-import TransactionService from './transactionService'
+import { createAccount, deleteAndUpdateAccount, getAccountById, updateAccount } from './accountService'
+import { createTransaction, deleteAndUpdateTransaction, getTransactionById, updateTransaction } from './transactionService'
 
-module.exports =  Object.freeze({
-    AcountService,
-    TransactionService
+const services = Object.freeze({
+    AccountService : {
+        createAccount,
+        deleteAndUpdateAccount,
+        updateAccount,
+        getAccountById
+    },
+    TransactionService : {
+        createTransaction,
+        deleteAndUpdateTransaction,
+        updateTransaction,
+        getTransactionById
+    }
 })
+
+export default services

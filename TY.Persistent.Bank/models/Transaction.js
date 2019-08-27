@@ -4,7 +4,7 @@ set('debug', true)
 const TransactionSchema = new Schema({
     account: {
         type: Schema.Types.ObjectId,
-        ref: 'account'
+        ref: 'Account'
     },
     amount: {
         type: Number,

@@ -2,10 +2,10 @@ import services from '../../services'
 
 module.exports = (app) => {
     app.post('/api/accounts/', async(req, res) => {
+  
+        const response =  await services.AccountService.createAccount(req.body)
 
-        const response =  await services.AccountService.create(req.body)
-
-        res.status(response.statusCode).set(response)
+        return res.status(response.statusCode).json(response)
     })
 
     app.put('/api/accounts/:id', async(req, res) => {
@@ -20,26 +20,26 @@ module.exports = (app) => {
             address,
             age
         }
-        const response =  await services.AccountService.update(request)
+        const response =  await services.AccountService.updateAccount(request)
 
-        res.status(response.statusCode).set(response)
+        return res.status(response.statusCode).json(response)
     })
 
     app.get('/api/accounts/:id', async(req, res) => {
 
         const { id } = req.params
 
-        const response =  await services.AccountService.getById(id)
+        const response =  await services.AccountService.getAccountById(id)
 
-        res.status(response.statusCode).set(response)
+        return res.status(response.statusCode).json(response)
     })
 
     app.delete('/api/accounts/:id', async(req, res) => {
 
         const { id } = req.params
 
-        const response =  await services.AccountService.deleteAndUpdate(id)
+        const response =  await services.AccountService.deleteAndUpdateAccount(id)
 
-        res.status(response.statusCode).set(response)
+        return res.status(response.statusCode).json(response)
     })
 }

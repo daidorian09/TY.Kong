@@ -2,7 +2,7 @@ import { model } from 'mongoose'
 const Account = model('Account')
 import logger from '../utils/logger/logger'
 
-module.exports = async function create(request) {
+export async function createAccount(request){
 
     try {
         const account = new Account()
@@ -17,6 +17,8 @@ module.exports = async function create(request) {
         account.balance = request.balance
     
         await account.save()
+
+        return account
     } catch (error) {
         logger.error(`Exception thrown in AccountRepository/create -> ${error.message}`)
         return null
@@ -24,10 +26,10 @@ module.exports = async function create(request) {
 
 }
 
-module.exports = async function getById(id) {
+export async function getAccountById(id) {
 
     try {
-        const account = await Account.findOne({id, isActive : true})
+        const account = await Account.findOne({_id : id, isActive : true})
         .lean()
         .exec()
         
@@ -35,11 +37,10 @@ module.exports = async function getById(id) {
     } catch (error) {
         logger.error(`Exception thrown in AccountRepository/getById repository -> ${error.message}`)
         return null
-    }  
-
+    } 
 }
 
-module.exports = async function deleteAndUpdate(id) {
+export async function deleteAndUpdateAccount(id) {
 
     try {
         const $set = {
@@ -57,7 +58,7 @@ module.exports = async function deleteAndUpdate(id) {
 
 }
 
-export default async function update(request) {
+export async function updateAccount(request) {
 
     try {
         const account = await Account.findByIdAndUpdate(request.id, request.data, {new: true}).lean().exec()

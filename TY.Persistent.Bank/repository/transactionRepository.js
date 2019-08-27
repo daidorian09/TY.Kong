@@ -2,7 +2,7 @@ import { model } from 'mongoose'
 const Transaction = model('Transaction')
 import logger from '../utils/logger/logger'
 
-module.exports = async function create(request) {
+export async function createTransaction(request) {
 
     try {
         const transaction = new Transaction()
@@ -14,6 +14,8 @@ module.exports = async function create(request) {
         transaction.transactionType = request.transactionType
     
         await transaction.save()
+
+        return transaction
     } catch (error) {
         logger.error(`Exception thrown in TransactionRepository/create -> ${error.message}`)
         return null
@@ -21,13 +23,14 @@ module.exports = async function create(request) {
 
 }
 
-module.exports = async function getById(id) {
+export async function getTransactionById(id) {
 
     try {
-        const transaction = await Transaction.findOne({id, isActive : true})
+        const transaction = await Transaction.findOne({_id : id, isActive : true})
+        .populate('account', '-password')
         .lean()
         .exec()        
-        return transaction;
+        return transaction
     } catch (error) {
         logger.error(`Exception thrown in TransactionRepository/getById -> ${error.message}`)
         return null
@@ -35,7 +38,7 @@ module.exports = async function getById(id) {
 
 }
 
-module.exports = async function deleteAndUpdate(id) {
+export async function deleteAndUpdateTransaction(id) {
 
     try {
         const $set = {
@@ -45,7 +48,7 @@ module.exports = async function deleteAndUpdate(id) {
             }
         }
         const transaction = await Transaction.findByIdAndUpdate(id, $set, {new: true}).lean().exec()
-        return transaction;
+        return transaction
     } catch (error) {
         logger.error(`Exception thrown in TransactionRepository/deleteAndUpdate -> ${error.message}`)
         return null
@@ -53,11 +56,11 @@ module.exports = async function deleteAndUpdate(id) {
 
 }
 
-module.exports = async function update(request) {
+export async function updateTransaction(request) {
 
     try {
         const transaction = await Transaction.findByIdAndUpdate(request.id, request.data, {new: true}).lean().exec()
-        return transaction;
+        return transaction
     } catch (error) {
         logger.error(`Exception thrown in TransactionRepository/update -> ${error.message}`)
         return null

@@ -1,8 +1,8 @@
 import repository from '../repository'
 import { setErrorResponse, setSuccesResponse} from '../shared/models/response/response'
 
-module.exports = async function create(request) {
-    const result = await repository.AccountRepository.create(request) 
+export async function createAccount(request) {
+    const result = await repository.AccountRepository.createAccount(request) 
 
     if(!result) {
         return setErrorResponse('Error on inserting a new account', 500)
@@ -11,8 +11,8 @@ module.exports = async function create(request) {
     return setSuccesResponse(result, 201)
 }
 
-module.exports = async function getById(id) {     
-    const result = await repository.AccountRepository.getById(id) 
+export async function getAccountById(id) {     
+    const result = await repository.AccountRepository.getAccountById(id) 
 
     if(!result) {
         return setErrorResponse('Account is not found', 400)
@@ -21,17 +21,17 @@ module.exports = async function getById(id) {
     return setSuccesResponse(result, 200)
 }
 
-module.exports = async function deleteAndUpdate(id) {
+export async function deleteAndUpdateAccount(id) {
 
-    const result = await repository.AccountRepository.deleteAndUpdate(id) 
+    const result = await repository.AccountRepository.deleteAndUpdateAccount(id) 
 
     return setSuccesResponse(result, 204) 
 
 }
 
-module.exports = async function update(request) {
+export async function updateAccount(request) {
 
-    const result = await repository.AccountRepository.update(request) 
+    const result = await repository.AccountRepository.updateAccount(request) 
 
     if(!result) {
         return setErrorResponse('Error on updating account', 500)
