@@ -15,11 +15,14 @@ module.exports = (app) => {
 
         const request = {
             id,
-            firstName,
-            lastName,
-            address,
-            age
+            data : {
+                firstName,
+                lastName,
+                address,
+                age
+            }            
         }
+
         const response =  await services.AccountService.updateAccount(request)
 
         return res.status(response.statusCode).json(response)
@@ -39,6 +42,23 @@ module.exports = (app) => {
         const { id } = req.params
 
         const response =  await services.AccountService.deleteAndUpdateAccount(id)
+
+        return res.status(response.statusCode).json(response)
+    })
+
+    app.put('/api/accounts/:id/balance', async(req, res) => {
+
+        const { id } = req.params
+        const { balance } = req.body
+
+        const request = {
+            id,
+            data : {
+                balance
+            }            
+        }
+
+        const response =  await services.AccountService.updateAccount(request)
 
         return res.status(response.statusCode).json(response)
     })

@@ -15,11 +15,13 @@ module.exports = (app) => {
 
         const request = {
             id,
-            account,
-            amount,
-            oldBalance,
-            currentBalance,
-            transactionType
+            data : {
+                account,
+                amount,
+                oldBalance,
+                currentBalance,
+                transactionType
+            }            
         }
         const response =  await services.TransactionService.updateTransaction(request)
 

@@ -15,12 +15,11 @@ export async function createTransaction(request) {
     
         await transaction.save()
 
-        return transaction
+        return true
     } catch (error) {
         logger.error(`Exception thrown in TransactionRepository/create -> ${error.message}`)
         return null
     }  
-
 }
 
 export async function getTransactionById(id) {
