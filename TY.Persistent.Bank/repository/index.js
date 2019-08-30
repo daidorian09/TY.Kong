@@ -1,4 +1,4 @@
-import { createAccount, updateAccount, getAccountById, deleteAndUpdateAccount } from './accountRepository'
+import { createAccount, updateAccount, getAccountById, deleteAndUpdateAccount, getAccountByEmail } from './accountRepository'
 import { createTransaction, deleteAndUpdateTransaction, getTransactionById, updateTransaction } from './transactionRepository'
 
 const repository = Object.freeze({
@@ -6,7 +6,8 @@ const repository = Object.freeze({
         createAccount,
         updateAccount,
         getAccountById,
-        deleteAndUpdateAccount
+        deleteAndUpdateAccount,
+        getAccountByEmail
     },
     TransactionRepository : {
         createTransaction,

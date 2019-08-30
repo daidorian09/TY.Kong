@@ -37,6 +37,11 @@ const AccountSchema = new Schema({
         default: 0,
         required: true
     },
+    salt: {
+        type: String,
+        default: null,
+        trim: true
+    },
     password: {
         type: String,
         min: 6,

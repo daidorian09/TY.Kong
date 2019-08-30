@@ -14,6 +14,7 @@ export async function createAccount(request) {
         account.email = request.email
         account.phoneNumber = request.phoneNumber
         account.age = request.age
+        account.salt = request.salt
         account.password = request.password
         account.balance = request.balance
 
@@ -21,7 +22,7 @@ export async function createAccount(request) {
 
         return true
     } catch (error) {
-        logger.error(`Exception thrown in AccountRepository/create -> ${error.message}`)
+        logger.error(`Exception thrown in AccountRepository/create repository-> ${error.message}`)
         return null
     }
 
@@ -42,6 +43,25 @@ export async function getAccountById(id) {
         return account
     } catch (error) {
         logger.error(`Exception thrown in AccountRepository/getById repository -> ${error.message}`)
+        return null
+    }
+}
+
+export async function getAccountByEmail(email) {
+
+    try {
+        const account = await Account.findOne({
+                email,
+                isActive: true
+            }, {
+                password: 0
+            })
+            .lean()
+            .exec()
+
+        return account
+    } catch (error) {
+        logger.error(`Exception thrown in AccountRepository/getAccountByEmail repository -> ${error.message}`)
         return null
     }
 }

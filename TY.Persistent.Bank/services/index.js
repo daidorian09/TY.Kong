@@ -1,4 +1,4 @@
-import { createAccount, deleteAndUpdateAccount, getAccountById, updateAccount } from './accountService'
+import { createAccount, deleteAndUpdateAccount, getAccountById, updateAccount, getAccountByEmail } from './accountService'
 import { createTransaction, deleteAndUpdateTransaction, getTransactionById, updateTransaction } from './transactionService'
 
 const services = Object.freeze({
@@ -6,7 +6,8 @@ const services = Object.freeze({
         createAccount,
         deleteAndUpdateAccount,
         updateAccount,
-        getAccountById
+        getAccountById,
+        getAccountByEmail
     },
     TransactionService : {
         createTransaction,

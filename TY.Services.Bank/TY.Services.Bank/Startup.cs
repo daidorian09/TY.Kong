@@ -9,6 +9,8 @@ using System.Net.Http;
 using TY.Services.Bank.Cqrs.Handlers;
 using TY.Services.Bank.Http;
 using TY.Services.Bank.Internal;
+using TY.Services.Bank.Services;
+using TY.Services.Bank.Services.Interfaces;
 
 namespace TY.Services.Bank
 {
@@ -35,6 +37,8 @@ namespace TY.Services.Bank
 
             services.AddTransient<HttpClient>();
             services.AddTransient<IRestClient, RestClient>();
+            services.AddSingleton<IPasswordHasher, PasswordHasherService>();
+
 
             #region Cqrs Services
 

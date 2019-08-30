@@ -37,6 +37,15 @@ module.exports = (app) => {
         return res.status(response.statusCode).json(response)
     })
 
+    app.get('/api/accounts/:email', async(req, res) => {
+
+        const { email } = req.params
+
+        const response =  await services.AccountService.getAccountByEmailt(email)
+
+        return res.status(response.statusCode).json(response)
+    })
+
     app.delete('/api/accounts/:id', async(req, res) => {
 
         const { id } = req.params

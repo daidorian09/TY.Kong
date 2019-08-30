@@ -1,4 +1,4 @@
-export function setSuccesResponse(data, statusCode = 200) {
+export function setSuccessResponse(data, statusCode = 200) {
     return {
         isSuccess : true,
         result : data,
