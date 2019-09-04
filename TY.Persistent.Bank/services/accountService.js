@@ -47,5 +47,5 @@ export async function updateAccount(request) {
         return setErrorResponse('Error on updating account', 500)
     }
 
-    return setSuccsesResponse(result, 200)
+    return setSuccsessResponse(result, 200)
 }

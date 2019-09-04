@@ -1,0 +1,23 @@
+﻿using Newtonsoft.Json;
+using TY.Services.Bank.Models.Response;
+
+namespace TY.Services.Bank.Cqrs.Account.Commands
+{
+    public class UpdateAccountCommand : ICommand<BaseResponse<Models.Account.Account>>
+    {
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        [JsonProperty("firstName")]
+        public string FirstName { get; set; }
+
+        [JsonProperty("lastName")]
+        public string LastName { get; set; }
+
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
+        [JsonProperty("age")]
+        public int Age { get; set; }
+    }
+}

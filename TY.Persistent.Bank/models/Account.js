@@ -64,28 +64,6 @@ const AccountSchema = new Schema({
     }
 })
 
-AccountSchema.pre('save', async function (next) {
-    try {
-      if (!this.isModified('password')) {
-        // Skip it & stop this function from running
-        return next()
-      }
-  
-      // Generate a salt
-      const salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS))
-  
-      // Hash the password along with our new salt
-      const hash = await bcrypt.hash(this.password, salt)
-  
-      // Override the cleartext password with the hashed one
-      this.password = hash
-  
-      return next()
-    } catch (e) {
-      return next(e)
-    }
-})
-
 AccountSchema.set('toJSON', {
     transform: function(doc, ret, opt) {
         delete ret['password']

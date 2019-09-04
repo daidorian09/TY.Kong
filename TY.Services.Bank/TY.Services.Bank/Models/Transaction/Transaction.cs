@@ -5,6 +5,7 @@ namespace TY.Services.Bank.Models.Transaction
     public class Transaction : IBaseEntity
     {
         public string Id { get; set; }
+        public bool IsActive { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public Account.Account Account{ get; set; }

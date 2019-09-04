@@ -6,6 +6,8 @@ namespace TY.Services.Bank.Models
     {
         string Id { get; }
 
+        bool IsActive { get; }
+
         DateTime? CreatedAt { get; }
 
         DateTime? UpdatedAt { get; }

@@ -37,11 +37,11 @@ module.exports = (app) => {
         return res.status(response.statusCode).json(response)
     })
 
-    app.get('/api/accounts/:email', async(req, res) => {
+    app.get('/api/accounts/:email/email', async(req, res) => {
 
         const { email } = req.params
 
-        const response =  await services.AccountService.getAccountByEmailt(email)
+        const response =  await services.AccountService.getAccountByEmail(email)
 
         return res.status(response.statusCode).json(response)
     })

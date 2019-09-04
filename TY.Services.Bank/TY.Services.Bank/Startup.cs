@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Net.Http;
+using System;
+using System.Text;
 using TY.Services.Bank.Cqrs.Handlers;
-using TY.Services.Bank.Http;
 using TY.Services.Bank.Internal;
-using TY.Services.Bank.Services;
-using TY.Services.Bank.Services.Interfaces;
+using TY.Services.Bank.Models.Configuration;
 
 namespace TY.Services.Bank
 {
@@ -35,10 +36,37 @@ namespace TY.Services.Bank
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 });
 
-            services.AddTransient<HttpClient>();
-            services.AddTransient<IRestClient, RestClient>();
-            services.AddSingleton<IPasswordHasher, PasswordHasherService>();
+            #region Jwt Services
 
+            services.Configure<JwtConfiguration>(Configuration.GetSection("jwtConfiguration"));
+            var jwtConfiguration = Configuration.GetSection("jwtConfiguration").Get<JwtConfiguration>();
+            var secret = Encoding.ASCII.GetBytes(jwtConfiguration.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secret),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+            #endregion
+
+            #region Services
+
+            services.AddServices();
+
+            #endregion        
 
             #region Cqrs Services
 
@@ -50,22 +78,22 @@ namespace TY.Services.Bank
             services.AddLogging();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseDeveloperExceptionPage();
         }
+        else
+        {
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseAuthentication();
+        app.UseHttpsRedirection();
+        app.UseMvc();
     }
+}
 }

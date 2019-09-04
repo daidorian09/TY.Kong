@@ -22,7 +22,7 @@ namespace TY.Services.Bank.Services
         public string HashPassword(string salt, string password)
         {
             var bytes = System.Text.Encoding.UTF8.GetBytes(password + salt);
-            using (var hash = System.Security.Cryptography.SHA512.Create())
+            using (var hash = SHA512.Create())
             {
                 var hashedInputBytes = hash.ComputeHash(bytes);
                 var hashedInputStringBuilder = new System.Text.StringBuilder(128);

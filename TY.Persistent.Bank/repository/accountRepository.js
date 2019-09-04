@@ -53,8 +53,6 @@ export async function getAccountByEmail(email) {
         const account = await Account.findOne({
                 email,
                 isActive: true
-            }, {
-                password: 0
             })
             .lean()
             .exec()
