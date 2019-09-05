@@ -1,5 +1,4 @@
 import { set, Schema, model } from 'mongoose'
-import bcrypt from 'bcrypt'
 set('debug', true)
 
 const AccountSchema = new Schema({
