@@ -92,7 +92,6 @@ namespace TY.Services.Bank
         }
 
         app.UseAuthentication();
-        app.UseHttpsRedirection();
         app.UseMvc();
     }
 }

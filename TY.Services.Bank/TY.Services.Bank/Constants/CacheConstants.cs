@@ -3,6 +3,6 @@
     public static class CacheConstants
     {
         public const string AuthorizationKeyPrefix = "Bearer-";
-        public const string Host = "localhost";
+        public const string Host = "bank-cache";
     }
 }

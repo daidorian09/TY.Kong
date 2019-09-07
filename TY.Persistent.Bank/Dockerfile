@@ -1,7 +1,7 @@
 FROM node:10
 
 #Maintaner
-LABEL Maintaner="yigit.at@trendyol" 
+LABEL Maintaner="yigit.at@trendyol.com" 
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -18,9 +18,6 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-#Set env
-ENV PORT=7001
-ENV CONNECTIONSTRING=mongodb://localhost:27017/bankDb
 
 EXPOSE 7001
 

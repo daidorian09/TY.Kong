@@ -1,0 +1,52 @@
+version: "3.7"
+services:
+  ty-services-bank:
+    build: ./TY.Services.Bank/TY.Services.Bank/
+    container_name: ty-services-bank
+    expose: 
+      - 5070
+    ports:
+      - "5070:5070"
+    environment: 
+      - ASPNETCORE_URLS=http://+:5070
+    depends_on:
+      - ty-persistent-bank
+    restart: always
+    networks: 
+      - ty-kong-network
+  ty-persistent-bank:
+    build: ./TY.Persistent.Bank/
+    container_name: ty-persistent-bank
+    ports:
+      - "7001:7001"
+    environment: 
+      - CONNECTIONSTRING=mongodb://bank-db:27017/bankDb
+      - PORT=7001
+    depends_on:
+      - bank-db
+    restart: always
+    networks: 
+      - ty-kong-network
+  bank-db:
+    image: mongo
+    container_name: bank-db
+    restart: always
+    ports:
+      - "27016:27017"
+    volumes:
+      - data:/data/db
+    networks: 
+      - ty-kong-network
+  bank-cache:
+    image: redis
+    container_name: bank-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    networks: 
+      - ty-kong-network
+volumes:
+   data:
+networks:
+  ty-kong-network:
+    name: ty-bank-network

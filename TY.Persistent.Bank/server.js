@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({
 //MongoDb connectionstring
 const db = process.env.CONNECTIONSTRING
 mongoose.Promise = global.Promise
+console.log('connectionString', process.env.CONNECTIONSTRING)
 
 // Connect to MongoDB
 mongoose

@@ -12,6 +12,7 @@ namespace TY.Services.Bank
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls(urls: "http://+:5070")
                 .UseStartup<Startup>();
     }
 }

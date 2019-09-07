@@ -1,20 +1,24 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
-WORKDIR /src
-COPY ["TY.Kong/TY.Services.Bank/TY.Services.Bank.csproj", "TY.Services.Bank/"]
-RUN dotnet restore "TY.Kong/TY.Services.Bank/TY.Services.Bank.csproj"
-COPY . .
-WORKDIR "/src/TY.Kong/TY.Services.Bank"
-RUN dotnet build "TY.Services.Bank.csproj" -c Release -o /app
+# Maintaner
+LABEL Maintaner="yigit.at@trendyol.com" 
 
-FROM build AS publish
-RUN dotnet publish "TY.Services.Bank.csproj" -c Release -o /app
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM base AS final
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=base /app/out .
+
+# Check App status 
+HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD curl --fail http://localhost:5070/api/healthcheck || exit 1
+
+# Up & Run app
 ENTRYPOINT ["dotnet", "TY.Services.Bank.dll"]
