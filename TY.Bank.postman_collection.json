@@ -1,0 +1,607 @@
+{
+	"info": {
+		"_postman_id": "b1671f09-753e-4aa6-8c96-7b11b385b2fb",
+		"name": "TY.Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Persistent",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "Get Account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Account",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstName\" : \"Burak\",\n\t\"lastName\" : \"Olgun\",\n\t\"address\" : \"DSM Grup Danışmanlık İletişim ve Satış Ticaret A.Ş. Maslak Mah. Büyükdere Cad. Noramin İş Merkezi NO:237/6 34398 Sarıyer/İstanbul\",\n\t\"age\" : 28\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7001/api/accounts/5d659255710dd90ae81f50b1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7001",
+									"path": [
+										"api",
+										"accounts",
+										"5d659255710dd90ae81f50b1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Create Transaction",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"account\" : \"5d659255710dd90ae81f50b1\",\n\t\"amount\" : 100,\n\t\"oldBalance\" : 25,\n\t\"currentBalance\" : 50,\n\t\"transactionType\" : 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7001/api/transactions/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7001",
+									"path": [
+										"api",
+										"transactions",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Transaction",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7001/api/transactions/5d658951f160c010345c7c05",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7001",
+									"path": [
+										"api",
+										"transactions",
+										"5d658951f160c010345c7c05"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Transaction",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"account\" : \"5d658659d0e55c31646ee6d1\",\n\t\"amount\" : 100,\n\t\"oldBalance\" : 25,\n\t\"currentBalance\" : 50,\n\t\"transactionType\" : 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:7001/api/transactions/5d658951f160c010345c7c05",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7001",
+									"path": [
+										"api",
+										"transactions",
+										"5d658951f160c010345c7c05"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Transaction",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:7001/api/transactions/5d658951f160c010345c7c05",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "7001",
+									"path": [
+										"api",
+										"transactions",
+										"5d658951f160c010345c7c05"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Healthcheck",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:7001/api/healthcheck/readiness",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7001",
+							"path": [
+								"api",
+								"healthcheck",
+								"readiness"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Business",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "Create Account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"FirstName\" : \"Test\",\n\t\"LastName\" : \"Test\",\n\t\"Address\" : \"Test Address\",\n\t\"Age\" : 25,\n\t\"Email\" : \"test@test.com\",\n\t\"PhoneNumber\" : \"+012345678\",\n\t\"Password\" : \"test123\",\n\t\"Balance\" : 1000\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5070/api/accounts",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5070",
+									"path": [
+										"api",
+										"accounts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Account",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5070/api/accounts/5d659255710dd90ae81f50b1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5070",
+									"path": [
+										"api",
+										"accounts",
+										"5d659255710dd90ae81f50b1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Account",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5070/api/accounts/5d659255710dd90ae81f50b1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5070",
+									"path": [
+										"api",
+										"accounts",
+										"5d659255710dd90ae81f50b1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Create Transaction",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"amount\" : 100,\n\t\"transactionType\" : 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5070/api/transactions/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5070",
+									"path": [
+										"api",
+										"transactions",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "SignIn",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\" : \"test@test.com\",\n\t\"password\" : \"test123\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:5070/api/authentication/sign-in",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5070",
+									"path": [
+										"api",
+										"authentication",
+										"sign-in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignOut",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ5aWdpdC5hdEB0cmVuZHlvbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJZaWdpdCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3N1cm5hbWUiOiJBdCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL21vYmlsZXBob25lIjoiKzkwNTU0ODk0MjU3NyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiNWQ2ZmY4YjA4NmZhZDIxYjcwNWIzOWU5IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3RyZWV0YWRkcmVzcyI6IkRTTSBHcnVwIERhbsSxxZ9tYW5sxLFrIMSwbGV0acWfaW0gdmUgU2F0xLHFnyBUaWNhcmV0IEEuxZ4uIE1hc2xhayBNYWguIELDvHnDvGtkZXJlIENhZC4gTm9yYW1pbiDEsMWfIE1lcmtlemkgTk86MjM3LzYgMzQzOTggU2FyxLF5ZXIvxLBzdGFuYnVsIiwiZXhwIjoxNTY3NjM0NDUxLCJpc3MiOiJ0ZXN0dXNlckB0ZXN0LmNvbSIsImF1ZCI6IlRZLlNlcnZpY2VzLktvbmcifQ.AK6youqpOg7Lztny1tNePafPNSSa4OEmjnrxU_v6IIM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5070/api/authentication/sign-out",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5070",
+									"path": [
+										"api",
+										"authentication",
+										"sign-out"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "Kong",
+			"item": [
+				{
+					"name": "Healthcheck - Bank",
+					"item": [
+						{
+							"name": "Healthcheck",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/healthcheck",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"healthcheck"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "Create - Account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"FirstName\" : \"Test123\",\n\t\"LastName\" : \"Test123\",\n\t\"Address\" : \"Test Address\",\n\t\"Age\" : 25,\n\t\"Email\" : \"test1@test.com\",\n\t\"PhoneNumber\" : \"+012345678\",\n\t\"Password\" : \"test123\",\n\t\"Balance\" : 1000\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/accounts/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"accounts",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get - Account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Deposit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJiZXJrYXQxOTk4QGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6IkJlcmsiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zdXJuYW1lIjoiQXQiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9tb2JpbGVwaG9uZSI6Iis5MDUzNDI1MDM2MTQiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjVkNzNiNDE4NGY1NjAwMDAxZWE1NmVhOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3N0cmVldGFkZHJlc3MiOiIxNTc5IHNvayBubzo1IGthdDogM01lcnNpbmxpIE1haCBLb25hayAvIMSwem1pciIsImV4cCI6MTU2ODA2MjAxOCwiaXNzIjoidGVzdHVzZXJAdGVzdC5jb20iLCJhdWQiOiJUWS5TZXJ2aWNlcy5Lb25nIn0.kt5uaixpAMNx03wfqvdhkgDI2v2b1ybzu9FQS60wWf4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"amount\" : 100,\n\t\"transactionType\" : 1\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/transactions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "SignIn",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\" : \"test@test.com\",\n\t\"password\" : \"test123\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/transactions",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SignOut",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ0ZXN0MUB0ZXN0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6IlRlc3QxMjMiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zdXJuYW1lIjoiVGVzdDEyMyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL21vYmlsZXBob25lIjoiKzAxMjM0NTY3OCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiNWQ3ODBkNTg4MzFlNDAwMDFlZWExYzk0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3RyZWV0YWRkcmVzcyI6IlRlc3QgQWRkcmVzcyIsImV4cCI6MTU2ODE1MjYyMywiaXNzIjoieDVjazN0UkNOYUlsek1wSDladTNid0NFS2VkaTkzanEiLCJhdWQiOiJUWS5TZXJ2aWNlcy5Lb25nIn0.9YbnxnivKWOhue5tpA7hdN_9-lA9QgG-IfpJ63L7B70",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/authentication/sign-out",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"authentication",
+										"sign-out"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
